@@ -55,8 +55,11 @@
  * pass the id of a resource though the query string to delete a resource DONE   
 
 ## Tests
-* your tests should start your server when they begin and stop your server when they finish
+
+* your tests should start your server when they begin and stop your server when they finish DONE
+
 * write a test to ensure that your api returns a status code of 404 for routes that have not been registered
+
 * write tests to ensure your `/api/resource-name` endpoint responds as described for each condition below:
 
 
@@ -70,10 +73,10 @@
 
 
 
- * `DELETE` - test 204, with valid id
- * `DELETE` - test 404, with invalid id
+ * `DELETE` - test 204, with valid id DONE
+ * `DELETE` - test 404, with invalid id DONE
 
 
- * `POST` - test 200, response body like  `{<data>}` for a post request with a valid body
- * `POST` - test 400, with an invalid request body
- * `POST` - test 409, with an a conflict for a unique property
+ * `POST` - test 200, response body like  `{<data>}` for a post request with a valid body DONE
+ * `POST` - test 400, with an invalid request body DONE
+ * `POST` - test 409, with an a conflict for a unique property DONE

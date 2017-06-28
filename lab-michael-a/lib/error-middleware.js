@@ -12,6 +12,7 @@ module.exports = (err, req, res, next) => {
 
   if(err.message.toLowerCase().includes('objectid failed'))
     return res.sendStatus(404);
-
+    
+  console.log(err.message);
   res.sendStatus(500);
 };

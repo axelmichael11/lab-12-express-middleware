@@ -14,7 +14,7 @@ describe('testing city routes', () => {
   after(server.stop);
 
   describe('test POST /api/cities',() => {
-    after(() => City.remove({}));
+    // after(() => City.remove({}));
 
     let CityData = {
       name: 'Seattle',
@@ -28,7 +28,7 @@ describe('testing city routes', () => {
       .send(CityData)
       .then(res => {
         // console.log('res.status^^^',res.status);
-        console.log((!res.body._id),'there is an id??');
+        // console.log((!res.body._id),'there is an id??');
         expect(res.status).toEqual(200);
         expect(res.body._id).toExist();
         // console.log('res.body.name^^^^',res.body.name);
@@ -59,52 +59,42 @@ describe('testing city routes', () => {
 
   describe('testing GET /api/cities', () => {
 
-    var tempCity;
-
-    afterEach(() => City.remove({}));
-    beforeEach(() => {
-      return new City({
-        name: 'Seattle',
-        bestSpot: 'loredos',
-      })
-      .save()
-      .then(city => {
-        tempCity = city;
-      });
-    });
-
     it('should respond with a city', () => {
       return superagent.get(`${API_URL}/api/cities/${tempCity._id}`)
       .then(res => {
-        console.log('res.status^^^^',res.status);
+        // console.log('res.^^^^',res.body);
         expect(res.status).toEqual(200);
         expect(res.body._id).toEqual(tempCity._id);
         expect(res.body.name).toEqual(tempCity.name);
-        expect(res.body.bestSpot).toEqual(tempCity.bestSpot);
+        // expect(res.body.bestSpot).toEqual(tempCity.bestSpot);
       });
     });
 
     it('should respond with a 404', () => {
       return superagent.get(`${API_URL}/api/cities/id:suhhdude`)
       .catch((err) => {
-        expect(err.status).toEqual(400);
+
+        expect(err.status).toEqual(404);
       });
     });
   });
 
 
   describe('testing PUT /api/cities', () => {
-    var tempCity;
 
+    //there are problems with this part, not quite sure how to approach it...
     afterEach(() => City.remove({}));
     beforeEach(() => {
       return new City({
         name: 'Seattle',
         bestSpot: 'loredos',
+        bestPark: 'gasworks',
+        bestActivity: 'camping',
       })
       .save()
       .then(city => {
         tempCity = city;
+        console.log(tempCity);
       });
     });
 

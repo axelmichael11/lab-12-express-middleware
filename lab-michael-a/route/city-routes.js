@@ -17,18 +17,13 @@ cityRouter.post('/api/cities', jsonParser, (req, res, next) => {
 });
 
 cityRouter.get('/api/cities/:id', (req, res, next) => {
-  console.log('hit get /api/cities/:id');
-  console.log(req.params.id);
-  if(!req.params.id){
-    res.writeHead(400, {
-      'Content-Type':'plain/text',
-    });
-    res.write('file not found');
-    return;
-  }
+  // console.log('hit get /api/cities/:id');
+  // console.log(req.params.id);
+  // console.log('req.status',req.status);
   City.findById(req.params.id)
   .then(city => {
     res.json(city);
+    // console.log('this is the city data',city);
   })
   .catch(next);
 });
@@ -36,13 +31,6 @@ cityRouter.get('/api/cities/:id', (req, res, next) => {
 cityRouter.put('/api/cities/:id', jsonParser, (req, res, next) => {
   console.log('hit put /api/cities/:id');
   console.log('req.params in the put request',req.params);
-  if(!req.params.id) {
-    res.writeHead(400,{
-      'Content-Type':'plain/text',
-    });
-    res.write('body not found');
-    return;
-  }
   let options = {
     runValidators: true,
     new: true,
@@ -55,13 +43,7 @@ cityRouter.put('/api/cities/:id', jsonParser, (req, res, next) => {
 
 
 cityRouter.delete('/api/cities/:id', (req, res, next) => {
-  if(!req.params.id) {
-    res.writeHead(400,{
-      'Content-Type':'plain/text',
-    });
-    res.write('body not found');
-    return;
-  }
+
   City.findByIdAndRemove(req.params.id)
   .then(()=> res.sendStatus(204))
   .catch(next);
