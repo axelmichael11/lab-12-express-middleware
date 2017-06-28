@@ -10,29 +10,30 @@
   * write a question and observation on canvas
 
 # Build Tool Instructions
-* create a package.json that lists all dependencies and developer dependencies
-* include a .env and .test.env
-* include an .eslintrc
-* include a .gitignore
-* include a readme with a project description
+* create a package.json that lists all dependencies and developer dependencies DONE
+* include a .env and .test.env DONE
+* include an .eslintrc DONE
+* include a .gitignore DONE
+* include a readme with a project description DONE -- need to finish project description
   * how to install
   * how to start the server
   * document the routes
-* include a package.json 
-  * have a lint script for running eslint
-  * have a test script for running mocha
-  * start script for running your server
-  * have a start-db script for running mongod
-  * have a stop-db script for stoping mongod
+* include a package.json DONE
+  * have a lint script for running eslint DONE
+  * have a test script for running mocha DONE
+  * start script for running your server DONE
+  * have a start-db script for running mongod DONE
+  * have a stop-db script for stoping mongod DONE
 
 # Directions
 * Create these directories to organize your code:
- * lib
- * model
- * route
- * db 
- * test
-* Create a HTTP Server using `express`
+ * lib DONE
+ * model DONE
+ * route DONE
+ * db DONE
+ * test DONE
+* Create a HTTP Server using `express` DONE
+
 
 * Create a Object Constructor using mongoose that creates a _resource_ with at least 3 properties
  * it can not have the same properties as the in class sample code, or yesterdays lab
@@ -63,7 +64,7 @@
  * `PUT` - test 400, with invalid body
  * `PUT` - test 404, with invalid id
  * `DELETE` - test 204, with valid id
- * `DELETE` - test 404, with invalid id 
+ * `DELETE` - test 404, with invalid id
  * `POST` - test 200, response body like  `{<data>}` for a post request with a valid body
  * `POST` - test 400, with an invalid request body
  * `POST` - test 409, with an a conflict for a unique property
