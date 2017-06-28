@@ -15,18 +15,23 @@ const app = express();
 app.use(require('../route/food-router.js'));
 
 app.use((err, req, res, next) => {
+  console.log(err);
   res.sendStatus(500);
-})
+});
 
 const serverControl = module.exports = {};
 
 serverControl.start = () => {
-  return new Promise((resolve) => {
-    server = app.listen(process.env.PORT, () => {
-      console.log('server up', process.env.PORT);
-      server.isOn = true;
-      resolve();
-    });
+  return new Promise((resolve, reject) => {
+    if(!server || !server.isOn){
+      server = app.listen(process.env.PORT, () => {
+        console.log('server up', process.env.PORT);
+        server.isOn = true;
+        resolve();
+      });
+      return;
+    }
+    reject();
   });
 };
 
@@ -35,11 +40,12 @@ serverControl.stop = () => {
   return new Promise((resolve, reject)=> {
     if (server && server.isOn) {
       server.close(() => {
-      console.log('server down');
-      server.isOn = false;
-      resolve();
-    })
-    return
-  }
-  reject();
+        console.log('server down');
+        server.isOn = false;
+        resolve();
+      });
+      return;
+    }
+    reject();
+  });
 };

@@ -48,11 +48,11 @@
 
 ### `/api/resource-name/:id`
 * `GET` request
- * pass the id of a resource though the query string to fetch a resource   
+ * pass the id of a resource though the query string to fetch a resource   DONE
 * `PUT` request
- * pass data as stringified json in the body of a put request to update a resource
+ * pass data as stringified json in the body of a put request to update a resource DONE
 * `DELETE` request
- * pass the id of a resource though the query string to delete a resource   
+ * pass the id of a resource though the query string to delete a resource DONE   
 
 ## Tests
 * your tests should start your server when they begin and stop your server when they finish

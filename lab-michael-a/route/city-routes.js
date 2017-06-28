@@ -1,8 +1,8 @@
-City'use strict';
+'use strict';
 
 const Router = require('express').Router;
 const jsonParser = require('body-parser').json();
-const Food = require('../model/city.js');
+const City = require('../model/city.js');
 
 let cityRouter = module.exports = new Router();
 
@@ -14,18 +14,15 @@ cityRouter.post('/api/cities', jsonParser, (req, res, next) => {
       'Content-Type':'plain/text',
     });
     res.write('file not found');
-    // res.end();
     return;
   }
-
-
   req.body.timeStamp = new Date();
   // console.log('this is req.body!!!!',req.body);
   new City(req.body)
   .save()
-  .then(food => {
+  .then(City => {
     res.json(City);
-    // console.log('this is the City.type ...',City.type);
+    console.log('this is res.json(city)^^^^^',res.json(City));
   })
   .catch(next);
 });
@@ -38,17 +35,13 @@ cityRouter.get('/api/cities/:id', (req, res, next) => {
       'Content-Type':'plain/text',
     });
     res.write('file not found');
-    // res.end();
     return;
   }
-  // console.log('req.params...',req.params);
-  Food.findById(req.params.id)
-  .then(food => {
-    res.json(food);
-    // console.log(food);
+  City.findById(req.params.id)
+  .then(city => {
+    res.json(city);
   })
   .catch(next);
-  // console.log(next);
 });
 
 cityRouter.put('/api/cities/:id', jsonParser, (req, res, next) => {
@@ -62,8 +55,9 @@ cityRouter.put('/api/cities/:id', jsonParser, (req, res, next) => {
     return;
   }
 
-  Food.findByIdAndUpdate(req.params.id, req.body, { new: true })
-  .then(food => res.json(food))
+//I noticed in class we used a cool runValidators key for the findByIdAndUpdate method... not sure if it needs to be included...
+  City.findByIdAndUpdate(req.params.id, req.body, { new: true })
+  .then(city => res.json(city))
   .catch(next);
 });
 
@@ -76,7 +70,7 @@ cityRouter.delete('/api/cities/:id', (req, res, next) => {
     res.write('body not found');
     return;
   }
-  Food.findByIdAndRemove(req.params.id)
+  City.findByIdAndRemove(req.params.id)
   .then(()=> res.sendStatus(204))
   .catch(next);
 
