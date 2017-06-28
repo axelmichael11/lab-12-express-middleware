@@ -1,5 +1,9 @@
 'use strict';
 
+
+
+const cors = require('cors');
+const morgan = require('morgan');
 const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
@@ -8,16 +12,17 @@ mongoose.Promise = Promise;
 mongoose.connect(process.env.MONGODB_URI);
 
 
-let server;
 const app = express();
+let server;
+
+app.use(cors());
+app.use(morgan('dev'));
 
 
-app.use(require('../route/food-router.js'));
+app.use(require('../route/city-routes.js'));
 
-app.use((err, req, res, next) => {
-  console.log(err);
-  res.sendStatus(500);
-});
+app.use(require('./error-middleware.js'));
+
 
 const serverControl = module.exports = {};
 
@@ -35,10 +40,9 @@ serverControl.start = () => {
   });
 };
 
-
 serverControl.stop = () => {
-  return new Promise((resolve, reject)=> {
-    if (server && server.isOn) {
+  return new Promise((resolve, reject) => {
+    if(server && server.isOn){
       server.close(() => {
         console.log('server down');
         server.isOn = false;
